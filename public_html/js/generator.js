@@ -16,8 +16,7 @@
             this.settings = options;
             
             this.init = function(){
-                this.getData(function(speech_data){
-                    console.log(speech_data);
+                this.getData(function(){
                     _initEventListeners();
                 });
             };
@@ -37,18 +36,25 @@
             };
             
             this.generateSentence = function(){
-                var sentence = this.speech_data[this.settings.sentence_key].map(function(x){
-                    console.log(x.length);
-                    return x[0];
+                return this.speech_data[this.settings.sentence_key].map(function(x){
+                    var n = Math.floor(Math.random() * x.length) + 1;
+                    return x[n];
                 }).join(' ');
-                console.log(sentence);
-                
-                return sentence;
             };
             
             function _initEventListeners(){
                 self.settings.sentences_submit.on('click', function(){
-                    self.generateSentence();
+                    var speech = '';
+                    for (var i = 0, max_p = self.settings.paragraphs_num.val(); i < max_p; i++) {
+                        speech += '<p>';
+                        
+                        for (var j = 0, max_s = self.settings.sentences_num.val(); j < max_s; j++)
+                            speech += self.generateSentence() + ' ';
+                        
+                        speech += '</p>';
+                    }
+                    
+                    self.settings.generated_speech.html(speech);
                 });
             }
         };
@@ -56,8 +62,10 @@
         
         var speech_path = 'speech_parts.json',
             app = new Generator(speech_path, {
-                sentences_input: $('#SentencesInput'),
+                sentences_num: $('#SentencesNum'),
+                paragraphs_num: $('#ParagraphsNum'),
                 sentences_submit: $('#SentencesSubmit'),
+                generated_speech: $('#GeneratedSpeech'),
                 sentence_key: 'speech'
             });
         

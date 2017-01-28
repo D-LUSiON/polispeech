@@ -15,28 +15,42 @@ and open the template in the editor.
     </head>
     <body>
         <div class="bs3-container">
-            <div class="row">
+            <div class="bs3-row">
                 <div class="col-xs-12">
                     <div class="panel-heading clearfix">
                         <h3 class="panel-title">Political speech generator v0.1</h3>
                     </div>
-                    <div class="panel-body">
-                        <label>Enter number of sentences:</label>
-                        <div class="form-element">
-                            <input type="number" id="SentencesInput" value="10"/>
+                    <div class="panel-body bs3-container">
+                        <div class="bs3-row">
+                            <div class="col-md-6">
+                                <label>Enter number of sentences per paragraph:</label>
+                                <div class="form-element">
+                                    <input type="number" id="SentencesNum" value="10"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Enter number of paragraphs:</label>
+                                <div class="form-element">
+                                    <input type="number" id="ParagraphsNum" value="4"/>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-element">
-                            <button type="button" id="SentencesSubmit">Generate</button>
+                        <div class="bs3-row">
+                            <div class="col-xs-12">
+                                <div class="form-element">
+                                    <button type="button" id="SentencesSubmit">Generate</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="bs3-row">
                 <div class="col-xs-12">
                     <div class="panel-heading clearfix">
                         <h3 class="panel-title">Generated speech:</h3>
                     </div>
-                    <div class="panel-body"></div>
+                    <div class="panel-body" id="GeneratedSpeech"></div>
                 </div>
             </div>
         </div>
